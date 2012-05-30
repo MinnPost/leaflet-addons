@@ -11,7 +11,7 @@ Include the following in your page (with the regular Leaflet scripts).
  
 ## Implements
 
- - Fullscreen control
+ - Fullscreen control.  Based from [this pull request](https://github.com/CloudMade/Leaflet/pull/603).
  
 ## Building
 
