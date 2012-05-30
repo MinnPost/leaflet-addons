@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Build Helper</title>
+
+  <link rel="stylesheet" href="http://leaflet.cloudmade.com/dist/leaflet.css" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="http://leaflet.cloudmade.com/dist/leaflet.ie.css" /><![endif]-->
+  <link rel="stylesheet" href="../src/leaflet-control-fullscreen.css" />
+  <link rel="stylesheet" href="../src/leaflet-control-fullscreen.ie.css" />
+
+  <style type="text/css">
+    #map {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="map">
+  <div>
+  <script type="text/javascript" src="http://leaflet.cloudmade.com/dist/leaflet.js"></script>
+  <script type="text/javascript" src="../src/leaflet-control-fullscreen.js"></script>
+  
+  <script type="text/javascript">
+  
+    var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
+      cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+      cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution}),
+      latlng = new L.LatLng(50.5, 30.51);
+
+    var map = new L.Map('map', {center: latlng, zoom: 15, layers: [cloudmade]});
+    
+    var fullscreen = new L.Control.Fullscreen();
+    map.addControl(fullscreen);
+
+  </script>
+</body>
+</html>
