@@ -16,7 +16,7 @@ L.Control.Fullscreen = L.Control.extend({
     this._createButton('Fullscreen', className + '-button', container, this._toggleFullScreen, this);
     
     // Handle ESC key
-    L.DomEvent.addListener(document, 'keyup', L.DomEvent.stop)
+    L.DomEvent.addListener(document, 'keyup', L.DomEvent.stop);
     L.DomEvent.addListener(document, 'keyup', this._exitFullScreen, this);
     
     return container;
@@ -27,15 +27,14 @@ L.Control.Fullscreen = L.Control.extend({
     link.href = '#';
     link.title = title;
     
-    L.DomEvent.addListener(link, 'click', L.DomEvent.stopPropagation)
-    L.DomEvent.addListener(link, 'click', L.DomEvent.preventDefault)
+    L.DomEvent.addListener(link, 'click', L.DomEvent.stopPropagation);
+    L.DomEvent.addListener(link, 'click', L.DomEvent.preventDefault);
     L.DomEvent.addListener(link, 'click', fn, context);
     
     return link;
   },
 
   _toggleFullScreen: function (event) {
-    console.log()
     this._map.fullscreen();
   },
   
@@ -50,7 +49,7 @@ L.Map.include({
   // Add fullscreen function, use force to turn on or off forcibly.
   fullscreen: function(force) {
     var fsClass = 'leaflet-fullscreen';
-    var classFS = isFullScreen = L.DomUtil.hasClass(this._container, fsClass);
+    var classFS = L.DomUtil.hasClass(this._container, fsClass);
     var mapFS = this._isFullscreen;
     var isFS = false;
     
