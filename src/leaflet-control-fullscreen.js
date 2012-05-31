@@ -9,67 +9,75 @@ L.Control.Fullscreen = L.Control.extend({
   },
 
   onAdd: function (map) {
-    map._isFullscreen = false;
-    
+    this._map = map;
     var className = 'leaflet-control-fullscreen';
     var container = L.DomUtil.create('div', className);
 
-    this._createButton('Fullscreen', className + '-button', container, map.fullscreen, map);
-
+    this._createButton('Fullscreen', className + '-button', container, this._toggleFullScreen, this);
+    
+    // Handle ESC key
+    L.DomEvent.addListener(document, 'keyup', L.DomEvent.stop)
+    L.DomEvent.addListener(document, 'keyup', this._exitFullScreen, this);
+    
     return container;
   },
-
+  
   _createButton: function (title, className, container, fn, context) {
     var link = L.DomUtil.create('a', className, container);
     link.href = '#';
     link.title = title;
-
-    L.DomEvent.addListener(link, 'click', L.DomEvent.stopPropagation);
-    L.DomEvent.addListener(link, 'click', L.DomEvent.preventDefault);
+    
+    L.DomEvent.addListener(link, 'click', L.DomEvent.stopPropagation)
+    L.DomEvent.addListener(link, 'click', L.DomEvent.preventDefault)
     L.DomEvent.addListener(link, 'click', fn, context);
-
+    
     return link;
   },
+
+  _toggleFullScreen: function (event) {
+    console.log()
+    this._map.fullscreen();
+  },
   
-  _toggleFullscreen: function() {
-    
-    
+  _exitFullScreen: function (event) {
+    if (event && event.type === 'keyup' && event.keyCode === 27) {
+      this._map.fullscreen(false);
+    }
   }
 });
 
 L.Map.include({
-  fullscreen: function (event) {
-    if (!this._isFullscreen) {
+  // Add fullscreen function, use force to turn on or off forcibly.
+  fullscreen: function(force) {
+    var fsClass = 'leaflet-fullscreen';
+    var classFS = isFullScreen = L.DomUtil.hasClass(this._container, fsClass);
+    var mapFS = this._isFullscreen;
+    var isFS = false;
     
+    // Determine fullscreen from priority of values
+    if (force === undefined) {
+      isFS = mapFS || classFS || false;
+    }
+    else {
+      isFS = !force;
+    }
+  
+    if (!isFS) {
       // Need to manually change the position as it is inline
       this._container.style.position = 'fixed';
-      L.DomUtil.addClass(this._container, 'leaflet-fullscreen');
+      L.DomUtil.addClass(this._container, fsClass);
       this._isFullscreen = true;
-
-      L.DomEvent.addListener(document, 'keyup', this.fullscreen, this);
-
       this.fire('enterFullscreen');
-
     } 
     else {
-      // Esc
-      if (event.type === 'keyup' && event.keyCode !== 27) {
-        return;
-      }
-
       // Need to manually change the position as it is inline
       this._container.style.position = 'relative';
-      L.DomUtil.removeClass(this._container, 'leaflet-fullscreen');
+      L.DomUtil.removeClass(this._container, fsClass);
       this._isFullscreen = false;
-
-      L.DomEvent.removeListener(document, 'keyup', this.fullscreen);
-
       this.fire('exitFullscreen');
-
     }
 
     this.invalidateSize();
-
     return this;
   }
 });
