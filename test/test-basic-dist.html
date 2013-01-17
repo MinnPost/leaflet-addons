@@ -10,7 +10,11 @@
   <!--[if lte IE 8]><link rel="stylesheet" href="../dist/leaflet-addons.ie.css" /><![endif]-->
 
   <style type="text/css">
-    #map {
+    .example-container {
+      margin: 0 20px 20px 0;
+      float: left;
+    }
+    .map {
       width: 300px;
       height: 300px;
     }
@@ -18,23 +22,51 @@
 </head>
 <body>
   <div id="container">
-    <div id="map">
+    <div class="example-container">
+      <h3>Fullscreen control</h3>
+      <div id="map-fullscreen" class="map"></div>
+    </div>
+
+    <div class="example-container">
+      <h3>Zoomer button control</h3>
+      <div id="map-zoomer-button" class="map"></div>
+      
+      <p><a href="http://thenounproject.com/noun/city/#icon-No1566" target="_blank">City</a> designed by <a href="http://thenounproject.com/thibault.geffroy" target="_blank">Thibault Geffroy</a> from The Noun Project</p>
+    </div>
   <div>
+  
   <script type="text/javascript" src="http://leaflet.cloudmade.com/dist/leaflet.js"></script>
   <script type="text/javascript" src="../dist/leaflet-addons.js"></script>
   
   <script type="text/javascript">
+    // Fullscreen
+    (function() {
+      var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
+        cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+        cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution}),
+        latlng = new L.LatLng(50.5, 30.51);
   
-    var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
-      cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
-      cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution}),
-      latlng = new L.LatLng(50.5, 30.51);
-
-    var map = new L.Map('map', {center: latlng, zoom: 15, layers: [cloudmade]});
+      var map = new L.Map('map-fullscreen', {center: latlng, zoom: 15, layers: [cloudmade]});
+      
+      var fullscreen = new L.Control.Fullscreen();
+      map.addControl(fullscreen);
+    })();
     
-    var fullscreen = new L.Control.Fullscreen();
-    map.addControl(fullscreen);
-
+    // Zoomer Button
+    (function() {
+      var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
+        cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+        cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution}),
+        latlng = new L.LatLng(50.5, 30.51);
+  
+      var map = new L.Map('map-zoomer-button', {center: latlng, zoom: 15, layers: [cloudmade]});
+      
+      var zoomer = new L.Control.ZoomerButton({
+        place: [40, -90],
+        zoom: 2
+      });
+      map.addControl(zoomer);
+    })();
   </script>
 </body>
 </html>

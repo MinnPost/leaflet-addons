@@ -1,59 +1,4 @@
 /**
- * Fullscreen control CSS for Leaflet Addons
- */
-.leaflet-fullscreen {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100% !important;
-  height: 100% !important;
-}
- 
-.leaflet-control-fullscreen {
-  padding: 5px;
-  background: rgba(0, 0, 0, 0.25);	
-}
-.leaflet-control-fullscreen a {
-  background-color: rgba(255, 255, 255, 0.75);
-}
-   
-.leaflet-control-fullscreen a {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  width: 19px;
-  height: 19px;
-}
-	
-.leaflet-control-fullscreen a:hover {
-  background-color: #fff;
-}
-
-.leaflet-touch .leaflet-control-fullscreen a {
-  width: 27px;
-  height: 27px;
-}
-.leaflet-control-fullscreen {
-  -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
-  border-radius: 7px;
-  padding: 5px;
-  background: rgba(0, 0, 0, 0.25);
-}
-.leaflet-control-fullscreen a {
-  background-image: url(images/fullscreen.png);
-  background-position: 50% 3px;
-  background-repeat: no-repeat;
-  display: block;
-}
-.leaflet-fullscreen .leaflet-control-fullscreen a {
-  background-position: 50% -21px;
-}
-.leaflet-control-zoom + .leaflet-control-fullscreen {
-  margin-top: 5px;
-}
-
-/**
  * zoomer-button control CSS for Leaflet Addons
  */
 .leaflet-zoomer-button {
@@ -107,4 +52,3 @@
 .leaflet-control-zoom + .leaflet-control-zoomer-button {
   margin-top: 5px;
 }
-

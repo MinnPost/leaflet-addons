@@ -1,18 +1,4 @@
 /**
- * Fullscreen control CSS for Leaflet Addons (IE Specific)
- */
-	
-.leaflet-control-fullscreen {
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#3F000000',EndColorStr='#3F000000');
-}
-.leaflet-control-fullscreen a {
-  background-color: #eee;
-}
-.leaflet-control-fullscreen a:hover {
-  background-color: #fff;
-}
-
-/**
  * zoomer-button control CSS for Leaflet Addons (IE Specific)
  */
 	
@@ -25,4 +11,3 @@
 .leaflet-control-zoomer-button a:hover {
   background-color: #fff;
 }
-
